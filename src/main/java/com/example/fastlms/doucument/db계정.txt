@@ -1,0 +1,6 @@
+-MariaDB
+ip : 127.0.0.1
+port : 43306
+db instance : minicampus
+id : minicampus_user
+password : a1234
