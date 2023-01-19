@@ -35,6 +35,10 @@ public class MainController {
 
     //request -> WEB -> SERVER
     //respose -> SERVER -> WEB
+    @RequestMapping("/error/denied")
+    public String errorDenied() {
 
+        return "error/denied"; //resources에 있는 파일
+    }
 
 }
