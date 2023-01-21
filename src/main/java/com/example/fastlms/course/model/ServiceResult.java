@@ -4,11 +4,10 @@ import com.example.fastlms.admin.model.CommonParam;
 import lombok.Data;
 
 @Data
-public class CourseParam extends CommonParam {
+public class ServiceResult {
 
-    long id; //course.id
-    long categoryId;
-
+    boolean result;
+    String message;
 
 
 }

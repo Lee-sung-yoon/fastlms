@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.fastlms.course.mapper.CourseMapper">
+<mapper namespace="com.example.fastlms.banner.mapper.BannerMapper">
 
     <sql id="selectListwhere">
         <if test="searchType != null and searchValue != null">
@@ -33,15 +33,15 @@
     <select id="selectListCount"
             resultType="long">
         select count(*)
-        from course
+        from banner
         where 1 = 1
             <include refid="selectListwhere"/>
     </select>
 
     <select id="selectList"
-            resultType="com.example.fastlms.course.dto.CourseDto">
+            resultType="com.example.fastlms.banner.dto.BannerDto">
         select *
-        from course
+        from banner
         where 1 = 1
             <include refid="selectListwhere"/>
         order by reg_dt desc

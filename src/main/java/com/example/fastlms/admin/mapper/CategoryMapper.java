@@ -1,5 +1,6 @@
 package com.example.fastlms.admin.mapper;
 
+import com.example.fastlms.admin.dto.CategoryDto;
 import com.example.fastlms.admin.dto.MemberDto;
 import com.example.fastlms.admin.model.MemberParam;
 import org.apache.ibatis.annotations.Mapper;
@@ -7,10 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface MemberMapper {
+public interface CategoryMapper {
 
-    long selectListCount(MemberParam parameter);
-    List<MemberDto> selectList(MemberParam parameter);
+    List<CategoryDto> select(CategoryDto parameter);
 
 
 

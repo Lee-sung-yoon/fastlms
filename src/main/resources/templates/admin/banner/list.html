@@ -97,15 +97,15 @@
 
 </head>
 <body>
-    <div th:replace="/fragments/layout.html :: fragment-admin-body-menu"></div>
+    <div th:replace="/fragments/layout.html :: fragment-admin-banner-body-menu"></div>
 
-    <h1>강좌 관리</h1>
+    <h1>배너 관리</h1>
 
     <div class="list">
         <div class="buttons">
             <p class="total-count">전체 <span th:text="${totalCount}"></span>개</p>
 
-            <a href="/admin/course/add.do">강좌 등록</a>
+            <a href="/admin/banner/add.do">배너 등록</a>
             <button id="deleteButton" type="button"> 선택 삭제 </button>
         </div>
         <table>
@@ -114,9 +114,12 @@
                 <th>
                     <input id="selectAll" type="checkbox" />
                 </th>
-                <th> NO</th>
+                <th> NO </th>
                 <th>
-                    강좌명
+                    배너명
+                </th>
+                <th>
+                    이미지
                 </th>
                 <th>
                     등록일
@@ -124,20 +127,23 @@
             </tr>
             </thead>
             <tbody id="dataLIst">
-            <tr th:each="x : ${list}">
-                <td>
-                    <input type="checkbox" th:value="${x.id}"/>
-                </td>
-                <td th:text="${x.seq}">1</td>
-                <td>
-                    <p>
-                        <a th:href="'edit.do?id=' + ${x.id}" th:text="${x.subject}">강좌명</a>
-                    </p>
-                </td>
-                <td>
-                    <p th:text="${x.regDt}">2023.01.01</p>
-                </td>
-            </tr>
+                <tr th:each="x : ${list}">
+                    <td>
+                        <input type="checkbox" th:value="${x.id}"/>
+                    </td>
+                    <td th:text="${x.seq}">1</td>
+                    <td>
+                        <p>
+                            <a th:href="'edit.do?id=' + ${x.id}" th:text="${x.subject}">배너명</a>
+                        </p>
+                    </td>
+                    <td>
+<!--                        이미지-->
+                    </td>
+                    <td>
+                        <p th:text="${x.regDt}">2023.01.01</p>
+                    </td>
+                </tr>
             </tbody>
         </table>
 
@@ -145,9 +151,7 @@
         <div class="pager" th:utext="${pager}">
         </div>
     </div>
-    <form name="deleteForm" method="post" action="/admin/course/delete.do">
-        <input type="hidden" name="idList"/>
-    </form>
+
 
 </body>
 </html>

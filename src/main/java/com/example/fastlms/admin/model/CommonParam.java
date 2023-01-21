@@ -7,7 +7,6 @@ public class CommonParam {
     long pageIndex;
     long pageSize;
 
-
     String searchType;
     String searchValue;
 

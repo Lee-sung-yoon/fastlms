@@ -247,7 +247,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
+        // 관리자로 인증
         Optional<Member> optionalMember = memberRepository.findById(username);
         if (!optionalMember.isPresent()) {
             throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");

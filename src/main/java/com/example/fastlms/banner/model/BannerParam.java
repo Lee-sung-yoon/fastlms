@@ -1,13 +1,13 @@
-package com.example.fastlms.course.model;
+package com.example.fastlms.banner.model;
 
 import com.example.fastlms.admin.model.CommonParam;
 import lombok.Data;
 
 @Data
-public class CourseParam extends CommonParam {
+public class BannerParam extends CommonParam {
 
     long id; //course.id
-    long categoryId;
+    long bannerId;
 
 
 

@@ -6,16 +6,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 @RequiredArgsConstructor
 @Controller
 public class MainController {
     private final MailComponents mailComponents;
-    @RequestMapping("/")
-    public String index() {
+    @RequestMapping("/admin/member/list")
+    public String index(HttpServletRequest request) {
+
+//        String userAgent = RequestUtils.getUserAgent(request);
+//        String clientIp = RequestUtils.getClientIP(request);
+//
+//        log.info(userAgent);
+//        log.info(clientIp);
         /*
         String email = "tjddbs1412@naver.com";
         String subject = "안녕하세요. 제로베이스입니다.";
@@ -23,7 +26,7 @@ public class MainController {
 
         mailComponents.sendMail(email, subject, text);
         */
-        return "index"; //resources에 있는 파일
+        return "/admin/member/list"; //resources에 있는 파일
     }
 
     // 스프링 -> MVC (view -> 템플릿엔진 화면에 내용을 출력(html))
