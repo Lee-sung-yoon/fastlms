@@ -28,4 +28,9 @@ public interface BannerService {
      * 배너 정보수정
      */
     boolean set(BannerInput parameter);
+
+    /**
+     * 배너 내용 삭제
+     */
+    boolean del(String idList);
 }

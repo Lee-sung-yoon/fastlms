@@ -17,7 +17,10 @@ public class Banner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    String linkName;
+    String orderBy;
     long bannerId;
+    long categoryId;
     String imagePath;
     String subject;
     @Lob

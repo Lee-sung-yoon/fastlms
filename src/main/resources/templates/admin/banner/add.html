@@ -33,6 +33,10 @@
     </style>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script>
+        function onClickUpload() {
+            let myInput = document.getElementById("my-input");
+            myInput.click();
+        }
         // $(document).ready(function (){
         //
         //     $('#submitForm').on('submit', function () {
@@ -67,8 +71,9 @@
                         배너 파일
                     </th>
                         <td>
-                            <button>파일 선택</button>선택된 파일 없음
-
+                            <div class="main">
+                                <input id="my-input" type="file"/>
+                            </div>
                         </td>
                 </tr>
                 <tr>
@@ -76,7 +81,7 @@
                         링크 주소
                     </th>
                     <td>
-                        <input type="text" required placeholder="링크 주소 입력">
+                        <input th:value="${detail.linkName}" type="text" name="linkName" required placeholder="링크 주소 입력">
                     </td>
                 </tr>
                 <tr>
@@ -86,8 +91,8 @@
                     <td>
                         <select name="categoryId" required>
                             <option value="">오픈 방법 선택</option>
-                            <option value="1">공개</option>
-                            <option value="2">비공개</option>
+                            <option th:selected="${detail.categoryId == 1}" value="1">현재창</option>
+                            <option th:selected="${detail.categoryId == 2}" value="2">새창</option>
                         </select>
                     </td>
                 </tr>
@@ -96,7 +101,7 @@
                         정렬 순서
                     </th>
                     <td>
-                        <input type="text" required placeholder="정렬 순서 입력">
+                        <input th:value="${detail.orderBy}" type="text" name="orderBy" required placeholder="정렬 순서 입력">
                     </td>
                 </tr>
                 <tr>
@@ -104,10 +109,9 @@
                         공개 여부
                     </th>
                     <td>
-                        <input type="checkbox">
+                        <input th:value="${detail.openYn}" type="checkbox" name="openYn">
                     </td>
                 </tr>
-
                 </tbody>
             </table>
 
@@ -117,8 +121,8 @@
                 <a href="/admin/banner/list.do">목록 이동</a>
             </div>
         </form>
-
     </div>
+
 
 <!--        <script type="text/javascript" src="/res/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>-->
 <!--        <script type="text/javascript">-->

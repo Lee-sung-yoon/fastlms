@@ -42,8 +42,6 @@ public class BannerController extends BaseController {
     public String add(Model model, HttpServletRequest request
             , BannerInput parameter) {
 
-
-
         boolean editMode = request.getRequestURI().contains("/edit.do");
         BannerDto detail = new BannerDto();
 
@@ -82,6 +80,15 @@ public class BannerController extends BaseController {
         } else {
             boolean result = bannerService.add(parameter);
         }
+
+        return "redirect:/admin/banner/list.do";
+    }
+
+    @PostMapping("/admin/banner/delete.do")
+    public String del(Model model, HttpServletRequest request, BannerInput parameter) {
+
+        boolean result = bannerService.del(parameter.getIdList());
+
 
         return "redirect:/admin/banner/list.do";
     }

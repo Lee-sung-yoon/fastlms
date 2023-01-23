@@ -6,7 +6,6 @@ import com.example.fastlms.banner.mapper.BannerMapper;
 import com.example.fastlms.banner.model.BannerInput;
 import com.example.fastlms.banner.model.BannerParam;
 import com.example.fastlms.banner.repository.BannerRepository;
-import com.example.fastlms.course.dto.CourseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -40,6 +39,10 @@ public class BannerServiceImpl implements BannerService{
     public boolean add(BannerInput parameter) {
 
         Banner banner = Banner.builder()
+                .openYn(parameter.getOpenYn())
+                .categoryId(parameter.getCategoryId())
+                .linkName(parameter.getLinkName())
+                .orderBy(parameter.getOrderBy())
                 .subject(parameter.getSubject())
                 .regDt(LocalDateTime.now())
                 .build();
@@ -66,10 +69,37 @@ public class BannerServiceImpl implements BannerService{
         }
 
         Banner banner = optionalBanner.get();
+        banner.setOpenYn(parameter.getOpenYn());
+        banner.setLinkName(parameter.getLinkName());
+        banner.setOrderBy(parameter.getOrderBy());
+        banner.setCategoryId(parameter.getCategoryId());
+        banner.setLinkName(parameter.getLinkName());
+        banner.setOrderBy(parameter.getOrderBy());
         banner.setSubject(parameter.getSubject());
         banner.setUdDt(LocalDateTime.now());
         bannerRepository.save(banner);
 
         return true;
+    }
+
+    @Override
+    public boolean del(String idList) {
+
+        if (idList != null && idList.length() > 0) {
+            String[] ids = idList.split(",");
+            for (String x : ids) {
+                long id = 0L;
+                try {
+                    id = Long.parseLong(x);
+                } catch (Exception e) {
+
+                }
+                if (id > 0) {
+                    bannerRepository.deleteById(id);
+                }
+            }
+        }
+        return true;
+
     }
 }

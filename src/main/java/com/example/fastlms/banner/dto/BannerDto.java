@@ -15,6 +15,9 @@ import java.time.LocalDateTime;
 @Data
 public class BannerDto {
     Long id;
+    String linkName;
+    String orderBy;
+    long categoryId;
     long bannerId;
     String imagePath;
     String subject;
@@ -35,6 +38,9 @@ public class BannerDto {
     public static BannerDto of(Banner banner) {
         return BannerDto.builder()
                 .id(banner.getId())
+                .linkName(banner.getLinkName())
+                .orderBy(banner.getOrderBy())
+                .categoryId(banner.getCategoryId())
                 .bannerId(banner.getBannerId())
                 .imagePath(banner.getImagePath())
                 .subject(banner.getSubject())
@@ -43,7 +49,7 @@ public class BannerDto {
                 .targetOption(banner.getTargetOption())
                 .openStartDt(banner.getOpenStartDt())
                 .closeStartDt(banner.getCloseStartDt())
-                .openYn(banner.getOpenYn())
+                .openYn(banner.getOpenYn()                )
                 .register(banner.getRegister())
                 .regDt(banner.getRegDt())
                 .updater(banner.getUpdater())
