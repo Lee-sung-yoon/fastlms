@@ -4,13 +4,12 @@ import com.example.fastlms.admin.model.CommonParam;
 import lombok.Data;
 
 @Data
-public class TakeCourseInput {
+public class TakeCourseParam extends CommonParam {
 
-    long courseId;
+    long id;
+    String status;
+
     String userId;
-
-    long takeCourseId; //take_course.id
-
 
 
 }

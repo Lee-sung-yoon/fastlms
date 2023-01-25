@@ -1,5 +1,10 @@
 package com.example.fastlms.member.controller;
 
+import com.example.fastlms.admin.dto.MemberDto;
+import com.example.fastlms.course.dto.TakeCourseDto;
+import com.example.fastlms.course.model.ServiceResult;
+import com.example.fastlms.course.model.TakeCourseParam;
+import com.example.fastlms.course.service.TakeCourseService;
 import com.example.fastlms.member.entity.Member;
 import com.example.fastlms.member.model.MemberInput;
 import com.example.fastlms.member.model.ResetPasswordInput;
@@ -17,11 +22,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
 public class MemberController {
+    private final MemberService memberService;
+    private final TakeCourseService takeCourseService;
+
     @RequestMapping("member/login")
     public String login() {
 
@@ -46,8 +56,6 @@ public class MemberController {
 
         return "member/find_password_result";
     }
-
-    private final MemberService memberService;
 
     @GetMapping("member/register")
     public String register() {
@@ -85,10 +93,75 @@ public class MemberController {
 
     }
 
-    @GetMapping("member/info")
-    public String memberInfo() {
+    @GetMapping("/member/info")
+    public String memberInfo(Model model, Principal principal) {
+
+        String userId = principal.getName();
+        MemberDto detail = memberService.detail(userId);
+
+        model.addAttribute("detail", detail);
+
+        // -> 화면에 보여주지 않는 정보들(x)
+        // -> 화면에만 보여주는 정보들(수정 불가) - readonly
+        // -> 수정가능한 정보들 - 수정 가능
 
         return "member/info";
+    }
+
+        @PostMapping("/member/info")
+        public String memberInfo(Model model
+            , MemberInput parameter
+            , Principal principal) {
+
+            String userId = principal.getName();
+            parameter.setUserId(userId);
+
+            ServiceResult result = memberService.updateMember(parameter);
+            if (!result.isResult()) {
+                model.addAttribute("message", result.getMessage());
+                return "common/error";
+            }
+            return "redirect:/member/info";
+    }
+
+    @GetMapping("/member/password")
+    public String memberPassword(Model model, Principal principal) {
+
+        String userId = principal.getName();
+        MemberDto detail = memberService.detail(userId);
+
+        model.addAttribute("detail", detail);
+
+        return "member/password";
+    }
+
+    @PostMapping("/member/password")
+    public String memberPasswordSubmit(Model model
+            , MemberInput parameter
+            , Principal principal) {
+
+        String userId = principal.getName();
+        parameter.setUserId(userId);
+
+        ServiceResult result = memberService.updateMemberPassword(parameter);
+        if (!result.isResult()) {
+            model.addAttribute("message", result.getMessage());
+            return "common/error";
+        }
+
+        return "redirect:/member/info";
+    }
+
+    @GetMapping("/member/takecourse")
+    public String memberTakeCourse(Model model, Principal principal) {
+
+        String userId = principal.getName();
+
+        List<TakeCourseDto> list = takeCourseService.myCourse(userId);
+
+        model.addAttribute("list", list);
+
+        return "member/takecourse";
     }
 
     @GetMapping("member/reset/password")
